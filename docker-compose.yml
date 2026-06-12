@@ -1,0 +1,9 @@
+services:
+  backend:
+    build: ./backend
+    container_name: aceit-backend
+    env_file:
+      - ./backend/.env
+    ports:
+      - "5000:5000"
+    restart: unless-stopped
