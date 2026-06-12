@@ -19,7 +19,7 @@ app.use('/api', apiLimiter);
 app.use('/api/auth', require('./src/routes/auth'));
 app.use('/api/cv', require('./src/routes/cv'));
 app.use('/api/interview', require('./src/routes/interview'));
-
+app.use('/api/quiz', require('./src/routes/quiz'));
 
 // Health check
 app.get('/', (req, res) => {

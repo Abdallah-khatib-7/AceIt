@@ -125,4 +125,39 @@ ${questionsAndAnswers.map((qa, i) => `Q${i + 1}: ${qa.question}\nA: ${qa.answer}
   return JSON.parse(response.choices[0].message.content);
 };
 
-module.exports = { analyzeCv, generateInterviewQuestion, scoreInterviewAnswer, generateInterviewReport };
+
+const generateQuizQuestions = async (major, jobTitle, totalQuestions) => {
+  const response = await client.chat.completions.create({
+    model: 'gpt-4o-mini',
+    messages: [
+      {
+        role: 'system',
+        content: `You are a technical quiz generator. Generate ${totalQuestions} multiple choice questions for a ${jobTitle} position in ${major}.
+        Return only a JSON array with this exact structure:
+        [
+          {
+            "question": "<the question>",
+            "options": ["<option A>", "<option B>", "<option C>", "<option D>"],
+            "correct_answer": "<exact text of the correct option>"
+          }
+        ]
+        Make questions varied — mix easy, medium, and hard. Return only valid JSON, no markdown.`
+      },
+      {
+        role: 'user',
+        content: `Generate ${totalQuestions} quiz questions.`
+      }
+    ],
+    temperature: 0.7
+  });
+
+  return JSON.parse(response.choices[0].message.content);
+};
+
+module.exports = { 
+  analyzeCv, 
+  generateInterviewQuestion, 
+  scoreInterviewAnswer, 
+  generateInterviewReport,
+  generateQuizQuestions
+};
