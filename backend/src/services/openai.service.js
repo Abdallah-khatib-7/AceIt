@@ -33,5 +33,96 @@ const analyzeCv = async (cvText) => {
 
   return JSON.parse(response.choices[0].message.content);
 };
+const generateInterviewQuestion = async (major, jobTitle, experienceLevel, yearsOfExperience, askedQuestions = []) => {
+  const askedList = askedQuestions.length > 0
+    ? `Do NOT repeat these questions:\n${askedQuestions.map((q, i) => `${i + 1}. ${q}`).join('\n')}`
+    : '';
 
-module.exports = { analyzeCv };
+  const response = await client.chat.completions.create({
+    model: 'gpt-4o-mini',
+    messages: [
+      {
+        role: 'system',
+        content: `You are a senior technical interviewer. Generate one interview question for a ${experienceLevel} ${jobTitle} position in ${major} with ${yearsOfExperience} years of experience.
+        ${askedList}
+        Return only a JSON object with this structure:
+        {
+          "question": "<the interview question>",
+          "type": "<technical|behavioral|situational>",
+          "difficulty": "<easy|medium|hard>"
+        }
+        Return only valid JSON, no markdown.`
+      },
+      {
+        role: 'user',
+        content: 'Generate the next interview question.'
+      }
+    ],
+    temperature: 0.8
+  });
+
+  return JSON.parse(response.choices[0].message.content);
+};
+
+const scoreInterviewAnswer = async (question, answer, jobTitle, experienceLevel) => {
+  const response = await client.chat.completions.create({
+    model: 'gpt-4o-mini',
+    messages: [
+      {
+        role: 'system',
+        content: `You are a senior technical interviewer evaluating a candidate's answer.
+        Return only a JSON object with this structure:
+        {
+          "score": <number 1-10>,
+          "feedback": "<specific honest feedback on the answer>",
+          "ideal_answer": "<what a perfect answer would include>",
+          "strengths": ["<strength 1>", "<strength 2>"],
+          "improvements": ["<improvement 1>", "<improvement 2>"]
+        }
+        Return only valid JSON, no markdown.`
+      },
+      {
+        role: 'user',
+        content: `Job: ${jobTitle} (${experienceLevel})
+Question: ${question}
+Candidate's answer: ${answer}`
+      }
+    ],
+    temperature: 0.3
+  });
+
+  return JSON.parse(response.choices[0].message.content);
+};
+
+const generateInterviewReport = async (questionsAndAnswers, jobTitle, major) => {
+  const response = await client.chat.completions.create({
+    model: 'gpt-4o-mini',
+    messages: [
+      {
+        role: 'system',
+        content: `You are a senior technical interviewer. Based on the full interview, generate a final report.
+        Return only a JSON object with this structure:
+        {
+          "overall_score": <number 1-10>,
+          "overall_summary": "<3-4 sentence honest summary of the candidate's performance>",
+          "top_strengths": ["<strength 1>", "<strength 2>", "<strength 3>"],
+          "areas_to_improve": ["<area 1>", "<area 2>", "<area 3>"],
+          "recommended_resources": ["<resource 1>", "<resource 2>"],
+          "hire_recommendation": "<strong yes|yes|maybe|no>"
+        }
+        Return only valid JSON, no markdown.`
+      },
+      {
+        role: 'user',
+        content: `Job: ${jobTitle} in ${major}
+Full interview:
+${questionsAndAnswers.map((qa, i) => `Q${i + 1}: ${qa.question}\nA: ${qa.answer}\nScore: ${qa.score}/10`).join('\n\n')}`
+      }
+    ],
+    temperature: 0.3
+  });
+
+  return JSON.parse(response.choices[0].message.content);
+};
+
+module.exports = { analyzeCv, generateInterviewQuestion, scoreInterviewAnswer, generateInterviewReport };
