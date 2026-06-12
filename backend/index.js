@@ -2,6 +2,8 @@ const express = require('express');
 const cors = require('cors');
 const helmet = require('helmet');
 const morgan = require('morgan');
+const { apiLimiter } = require('./src/middleware/rateLimiter');
+const errorHandler = require('./src/middleware/errorHandler');
 require('dotenv').config();
 
 const app = express();
@@ -11,10 +13,14 @@ app.use(helmet());
 app.use(cors({ origin: process.env.CLIENT_URL }));
 app.use(morgan('dev'));
 app.use(express.json());
+app.use('/api', apiLimiter);
+
+// Routes
+app.use('/api/auth', require('./src/routes/auth'));
 
 // Health check
 app.get('/', (req, res) => {
-  res.json({ 
+  res.json({
     message: '🚀 AceIt is Running Perfectly',
     status: 'ok',
     version: '1.0.0'
@@ -27,10 +33,7 @@ app.use((req, res) => {
 });
 
 // Global error handler
-app.use((err, req, res, next) => {
-  console.error(err.stack);
-  res.status(500).json({ message: 'Something went wrong' });
-});
+app.use(errorHandler);
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
