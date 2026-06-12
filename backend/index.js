@@ -22,6 +22,8 @@ app.use('/api/interview', require('./src/routes/interview'));
 app.use('/api/quiz', require('./src/routes/quiz'));
 app.use('/api/reports', require('./src/routes/reports'));
 app.use('/api/roadmap', require('./src/routes/roadmap'));
+app.use('/api/subscription', require('./src/routes/subscription'));
+
 
 // Health check
 app.get('/', (req, res) => {
