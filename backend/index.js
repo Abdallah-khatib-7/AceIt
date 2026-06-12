@@ -17,7 +17,7 @@ app.use('/api', apiLimiter);
 
 // Routes
 app.use('/api/auth', require('./src/routes/auth'));
-
+app.use('/api/cv', require('./src/routes/cv'));
 // Health check
 app.get('/', (req, res) => {
   res.json({
