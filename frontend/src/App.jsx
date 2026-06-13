@@ -5,6 +5,7 @@ import Login from './pages/Login';
 import Register from './pages/Register';
 import Dashboard from './pages/Dashboard';
 import Settings from './pages/Settings';
+import CvReview from './pages/CvReview';
 
 
 const ProtectedRoute = ({ children }) => {
@@ -33,6 +34,11 @@ function App() {
       <Route path="/settings" element={
   <ProtectedRoute>
     <Settings />
+  </ProtectedRoute>
+} />
+<Route path="/cv" element={
+  <ProtectedRoute>
+    <CvReview />
   </ProtectedRoute>
 } />
     </Routes>
