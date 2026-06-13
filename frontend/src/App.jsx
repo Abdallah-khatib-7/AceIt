@@ -2,6 +2,7 @@ import { Routes, Route, Navigate } from 'react-router-dom';
 import { useAuth } from './context/AuthContext';
 import Landing from './pages/Landing';
 import Login from './pages/Login';
+import Register from './pages/Register';
 
 const ProtectedRoute = ({ children }) => {
   const { user, loading } = useAuth();
@@ -12,9 +13,14 @@ const ProtectedRoute = ({ children }) => {
 function App() {
   return (
     <Routes>
+
+      {/* Public Routes */}
       <Route path="/" element={<Landing />} />
       <Route path="/login" element={<Login />} />
-      <Route path="/register" element={<div>Register Coming Soon</div>} />
+      <Route path="/register" element={<Register />} />
+
+
+      {/* Protected Routes */}
       <Route path="/dashboard" element={
         <ProtectedRoute>
           <div>Dashboard Coming Soon</div>

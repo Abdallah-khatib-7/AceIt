@@ -1,21 +1,12 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { useNavigate, Link } from 'react-router-dom';
-import { Eye, EyeOff, Mail, Lock, Zap, Brain, FileText, Trophy, BarChart3, ArrowRight } from 'lucide-react';
+import { Eye, EyeOff, Mail, Lock, Zap,  ArrowRight } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
 import api from '../services/api';
 import toast from 'react-hot-toast';
 
-const floatingIcons = [
-  { icon: <Brain size={22} />, x: '8%', y: '15%', delay: 0, duration: 6 },
-  { icon: <FileText size={18} />, x: '88%', y: '20%', delay: 1, duration: 7 },
-  { icon: <Trophy size={20} />, x: '12%', y: '70%', delay: 2, duration: 5 },
-  { icon: <BarChart3 size={16} />, x: '85%', y: '65%', delay: 0.5, duration: 8 },
-  { icon: <Zap size={14} />, x: '75%', y: '85%', delay: 1.5, duration: 6 },
-  { icon: <Brain size={14} />, x: '20%', y: '88%', delay: 3, duration: 7 },
-  { icon: <FileText size={24} />, x: '92%', y: '45%', delay: 2.5, duration: 5 },
-  { icon: <Trophy size={16} />, x: '5%', y: '45%', delay: 1, duration: 9 },
-];
+
 
 export default function Login() {
   const navigate = useNavigate();
@@ -65,23 +56,7 @@ export default function Login() {
       <div style={{ position: 'absolute', top: '10%', left: '5%', width: 400, height: 400, background: 'radial-gradient(circle, rgba(124,58,237,0.12), transparent)', borderRadius: '50%', filter: 'blur(60px)', pointerEvents: 'none' }} />
       <div style={{ position: 'absolute', bottom: '10%', right: '5%', width: 350, height: 350, background: 'radial-gradient(circle, rgba(236,72,153,0.1), transparent)', borderRadius: '50%', filter: 'blur(60px)', pointerEvents: 'none' }} />
 
-      {/* Floating icons */}
-      {floatingIcons.map((item, i) => (
-        <motion.div
-          key={i}
-          animate={{ y: [0, -20, 0], rotate: [0, 5, -5, 0] }}
-          transition={{ duration: item.duration, delay: item.delay, repeat: Infinity, ease: 'easeInOut' }}
-          style={{
-            position: 'absolute',
-            left: item.x,
-            top: item.y,
-            color: 'rgba(167,139,250,0.25)',
-            pointerEvents: 'none'
-          }}
-        >
-          {item.icon}
-        </motion.div>
-      ))}
+     
 
       {/* Card */}
       <motion.div
