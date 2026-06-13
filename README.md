@@ -1,5 +1,12 @@
 # AceIt — AI Interview Coach
-
+ ![Node.js](https://img.shields.io/badge/Node.js-20+-339933?style=for-the-badge&logo=node.js&logoColor=white)
+![React](https://img.shields.io/badge/React-18-61DAFB?style=for-the-badge&logo=react&logoColor=black)
+![MySQL](https://img.shields.io/badge/MySQL-8.0-4479A1?style=for-the-badge&logo=mysql&logoColor=white)
+![Docker](https://img.shields.io/badge/Docker-Containerized-2496ED?style=for-the-badge&logo=docker&logoColor=white)
+![AWS](https://img.shields.io/badge/AWS-S3+EC2-FF9900?style=for-the-badge&logo=amazon-aws&logoColor=white)
+![OpenAI](https://img.shields.io/badge/OpenAI-GPT--4o--mini-412991?style=for-the-badge&logo=openai&logoColor=white)
+![Vercel](https://img.shields.io/badge/Vercel-Deployed-000000?style=for-the-badge&logo=vercel&logoColor=white)
+![License](https://img.shields.io/badge/License-Portfolio-orange?style=for-the-badge)
 A full-stack, AI-powered SaaS platform that helps developers and job seekers prepare smarter and interview better.
 
 CV scoring · AI mock interviews · Skill quizzes · Personalized roadmap · PDF reports
