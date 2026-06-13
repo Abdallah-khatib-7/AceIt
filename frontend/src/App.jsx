@@ -9,6 +9,7 @@ import CvReview from './pages/CvReview';
 import Interview from './pages/Interview';
 import Quiz from './pages/Quiz';
 import Roadmap from './pages/Roadmap';
+import Reports from './pages/Reports';
 
 
 const ProtectedRoute = ({ children }) => {
@@ -59,6 +60,12 @@ function App() {
 <Route path="/roadmap" element={
   <ProtectedRoute>
     <Roadmap />
+  </ProtectedRoute>
+} />
+
+<Route path="/reports" element={
+  <ProtectedRoute>
+    <Reports />
   </ProtectedRoute>
 } />
     </Routes>
