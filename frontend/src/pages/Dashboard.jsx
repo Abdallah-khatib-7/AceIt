@@ -5,7 +5,7 @@ import { useAuth } from '../context/AuthContext';
 import api from '../services/api';
 import {
   FileText, Brain, Zap,  Trophy, LogOut,
-  ArrowRight, Star, ChevronDown
+  ArrowRight, Star, ChevronDown, Settings as SettingsIcon
 } from 'lucide-react';
 
 const fadeUp = {
@@ -107,31 +107,37 @@ export default function Dashboard() {
           </span>
 
           {/* Profile dropdown */}
-          <div style={{ position: 'relative' }}>
-            <button onClick={() => setProfileOpen(!profileOpen)}
-              style={{ display: 'flex', alignItems: 'center', gap: 8, padding: '6px 10px', background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.08)', borderRadius: 10, cursor: 'pointer' }}>
-              <div style={{ width: 28, height: 28, borderRadius: '50%', background: 'linear-gradient(135deg, #7c3aed, #ec4899)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 12, fontWeight: 700, color: '#fff' }}>
-                {user?.name?.[0]?.toUpperCase()}
-              </div>
-              <span style={{ fontSize: 13, fontWeight: 600, color: '#fff' }}>{user?.name?.split(' ')[0]}</span>
-              <ChevronDown size={14} style={{ color: 'rgba(255,255,255,0.4)' }} />
-            </button>
+<div style={{ position: 'relative' }}>
+  <button onClick={() => setProfileOpen(!profileOpen)}
+    style={{ display: 'flex', alignItems: 'center', gap: 8, padding: '6px 10px', background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.08)', borderRadius: 10, cursor: 'pointer' }}>
+    <div style={{ width: 28, height: 28, borderRadius: '50%', background: 'linear-gradient(135deg, #7c3aed, #ec4899)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 12, fontWeight: 700, color: '#fff' }}>
+      {user?.name?.[0]?.toUpperCase()}
+    </div>
+    <span style={{ fontSize: 13, fontWeight: 600, color: '#fff' }}>{user?.name?.split(' ')[0]}</span>
+    <ChevronDown size={14} style={{ color: 'rgba(255,255,255,0.4)' }} />
+  </button>
 
-            {profileOpen && (
-              <div style={{ position: 'absolute', top: '100%', right: 0, marginTop: 8, width: 180, background: '#161616', border: '1px solid rgba(255,255,255,0.08)', borderRadius: 12, padding: 8, zIndex: 200 }}>
-                <div style={{ padding: '8px 12px', borderBottom: '1px solid rgba(255,255,255,0.06)', marginBottom: 4 }}>
-                  <p style={{ fontSize: 13, fontWeight: 600, margin: 0 }}>{user?.name}</p>
-                  <p style={{ fontSize: 11, color: 'rgba(255,255,255,0.35)', margin: 0 }}>{user?.email}</p>
-                </div>
-                <button onClick={logout}
-                  style={{ width: '100%', display: 'flex', alignItems: 'center', gap: 8, padding: '9px 12px', background: 'transparent', border: 'none', color: 'rgba(255,255,255,0.5)', fontSize: 13, cursor: 'pointer', borderRadius: 8, transition: 'all 0.2s' }}
-                  onMouseEnter={e => { e.currentTarget.style.background = 'rgba(239,68,68,0.1)'; e.currentTarget.style.color = '#ef4444'; }}
-                  onMouseLeave={e => { e.currentTarget.style.background = 'transparent'; e.currentTarget.style.color = 'rgba(255,255,255,0.5)'; }}>
-                  <LogOut size={14} /> Sign Out
-                </button>
-              </div>
-            )}
-          </div>
+  {profileOpen && (
+    <div style={{ position: 'absolute', top: '100%', right: 0, marginTop: 8, width: 200, background: '#161616', border: '1px solid rgba(255,255,255,0.08)', borderRadius: 12, padding: 8, zIndex: 200 }}>
+      <div style={{ padding: '8px 12px', borderBottom: '1px solid rgba(255,255,255,0.06)', marginBottom: 4 }}>
+        <p style={{ fontSize: 13, fontWeight: 600, margin: 0 }}>{user?.name}</p>
+        <p style={{ fontSize: 11, color: 'rgba(255,255,255,0.35)', margin: 0 }}>{user?.email}</p>
+      </div>
+      <button onClick={() => { navigate('/settings'); setProfileOpen(false); }}
+        style={{ width: '100%', display: 'flex', alignItems: 'center', gap: 8, padding: '9px 12px', background: 'transparent', border: 'none', color: 'rgba(255,255,255,0.5)', fontSize: 13, cursor: 'pointer', borderRadius: 8, transition: 'all 0.2s' }}
+        onMouseEnter={e => { e.currentTarget.style.background = 'rgba(255,255,255,0.05)'; e.currentTarget.style.color = '#fff'; }}
+        onMouseLeave={e => { e.currentTarget.style.background = 'transparent'; e.currentTarget.style.color = 'rgba(255,255,255,0.5)'; }}>
+        <SettingsIcon size={14} /> Settings
+      </button>
+      <button onClick={logout}
+        style={{ width: '100%', display: 'flex', alignItems: 'center', gap: 8, padding: '9px 12px', background: 'transparent', border: 'none', color: 'rgba(255,255,255,0.5)', fontSize: 13, cursor: 'pointer', borderRadius: 8, transition: 'all 0.2s' }}
+        onMouseEnter={e => { e.currentTarget.style.background = 'rgba(239,68,68,0.1)'; e.currentTarget.style.color = '#ef4444'; }}
+        onMouseLeave={e => { e.currentTarget.style.background = 'transparent'; e.currentTarget.style.color = 'rgba(255,255,255,0.5)'; }}>
+        <LogOut size={14} /> Sign Out
+      </button>
+    </div>
+  )}
+</div>
         </div>
       </nav>
 

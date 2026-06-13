@@ -4,6 +4,7 @@ import Landing from './pages/Landing';
 import Login from './pages/Login';
 import Register from './pages/Register';
 import Dashboard from './pages/Dashboard';
+import Settings from './pages/Settings';
 
 
 const ProtectedRoute = ({ children }) => {
@@ -28,7 +29,15 @@ function App() {
           <Dashboard />
         </ProtectedRoute>
       } />
+
+      <Route path="/settings" element={
+  <ProtectedRoute>
+    <Settings />
+  </ProtectedRoute>
+} />
     </Routes>
+       
+    
   );
 }
 
