@@ -1,5 +1,6 @@
 import { Routes, Route, Navigate } from 'react-router-dom';
 import { useAuth } from './context/AuthContext';
+import Landing from './pages/Landing';
 
 const ProtectedRoute = ({ children }) => {
   const { user, loading } = useAuth();
@@ -10,7 +11,7 @@ const ProtectedRoute = ({ children }) => {
 function App() {
   return (
     <Routes>
-      <Route path="/" element={<div>Landing Page Coming Soon</div>} />
+      <Route path="/" element={<Landing />} />
       <Route path="/login" element={<div>Login Coming Soon</div>} />
       <Route path="/register" element={<div>Register Coming Soon</div>} />
       <Route path="/dashboard" element={
