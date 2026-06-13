@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { useNavigate, Link } from 'react-router-dom';
-import { Eye, EyeOff, Mail, Lock, User, Zap,  ArrowRight, CheckCircle } from 'lucide-react';
+import { Eye, EyeOff, Mail, Lock, User, Zap,  ArrowRight, CheckCircle, ArrowLeft } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
 import api from '../services/api';
 import toast from 'react-hot-toast';
@@ -53,6 +53,7 @@ export default function Register() {
       overflow: 'hidden',
       padding: '40px 24px'
     }}>
+      
 
       {/* Background */}
       <div style={{ position: 'absolute', inset: 0 }}>
@@ -68,6 +69,7 @@ export default function Register() {
       
 
       {/* Main container */}
+      
       <motion.div
         initial={{ opacity: 0, y: 40 }}
         animate={{ opacity: 1, y: 0 }}
@@ -88,6 +90,7 @@ export default function Register() {
       >
 
         {/* Left panel */}
+        
         <div style={{
           padding: '48px 40px',
           background: 'linear-gradient(135deg, rgba(124,58,237,0.15), rgba(79,70,229,0.1))',
@@ -97,6 +100,12 @@ export default function Register() {
           justifyContent: 'center',
           gap: 24
         }}>
+          <button onClick={() => navigate('/')}
+  style={{ display: 'flex', alignItems: 'center', gap: 6, background: 'none', border: 'none', color: 'rgba(255,255,255,0.4)', cursor: 'pointer', fontSize: 13, fontWeight: 500, marginBottom: 24, padding: 0 }}
+  onMouseEnter={e => e.currentTarget.style.color = '#fff'}
+  onMouseLeave={e => e.currentTarget.style.color = 'rgba(255,255,255,0.4)'}>
+  <ArrowLeft size={14} /> Back to home
+</button>
           <div>
             <div style={{ display: 'inline-flex', padding: 12, borderRadius: 16, background: 'linear-gradient(135deg, #7c3aed, #4f46e5)', marginBottom: 20, boxShadow: '0 0 30px rgba(124,58,237,0.4)' }}>
               <Zap size={24} color="#fff" />
@@ -240,6 +249,7 @@ export default function Register() {
             <Link to="/login" style={{ color: '#a78bfa', fontWeight: 600, textDecoration: 'none' }}>Sign in</Link>
           </p>
         </div>
+        
       </motion.div>
     </div>
   );

@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { useNavigate, Link } from 'react-router-dom';
-import { Eye, EyeOff, Mail, Lock, Zap,  ArrowRight } from 'lucide-react';
+import { Eye, EyeOff, Mail, Lock, Zap,  ArrowRight, ArrowLeft } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
 import api from '../services/api';
 import toast from 'react-hot-toast';
@@ -75,7 +75,14 @@ export default function Login() {
           borderRadius: 28,
           backdropFilter: 'blur(20px)',
         }}
+        
       >
+        <button onClick={() => navigate('/')}
+  style={{ display: 'flex', alignItems: 'center', gap: 6, background: 'none', border: 'none', color: 'rgba(255,255,255,0.4)', cursor: 'pointer', fontSize: 13, fontWeight: 500, marginBottom: 24, padding: 0 }}
+  onMouseEnter={e => e.currentTarget.style.color = '#fff'}
+  onMouseLeave={e => e.currentTarget.style.color = 'rgba(255,255,255,0.4)'}>
+  <ArrowLeft size={14} /> Back to home
+</button>
         {/* Logo */}
         <div style={{ textAlign: 'center', marginBottom: 36 }}>
           <motion.div
