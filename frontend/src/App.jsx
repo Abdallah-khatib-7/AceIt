@@ -8,6 +8,7 @@ import Settings from './pages/Settings';
 import CvReview from './pages/CvReview';
 import Interview from './pages/Interview';
 import Quiz from './pages/Quiz';
+import Roadmap from './pages/Roadmap';
 
 
 const ProtectedRoute = ({ children }) => {
@@ -52,6 +53,12 @@ function App() {
 <Route path="/quiz" element={
   <ProtectedRoute>
     <Quiz />
+  </ProtectedRoute>
+} />
+
+<Route path="/roadmap" element={
+  <ProtectedRoute>
+    <Roadmap />
   </ProtectedRoute>
 } />
     </Routes>
