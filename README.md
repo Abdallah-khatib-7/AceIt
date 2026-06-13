@@ -7,6 +7,8 @@
 ![OpenAI](https://img.shields.io/badge/OpenAI-GPT--4o--mini-412991?style=for-the-badge&logo=openai&logoColor=white)
 ![Vercel](https://img.shields.io/badge/Vercel-Deployed-000000?style=for-the-badge&logo=vercel&logoColor=white)
 ![License](https://img.shields.io/badge/License-Portfolio-orange?style=for-the-badge)
+
+
 A full-stack, AI-powered SaaS platform that helps developers and job seekers prepare smarter and interview better.
 
 CV scoring · AI mock interviews · Skill quizzes · Personalized roadmap · PDF reports
