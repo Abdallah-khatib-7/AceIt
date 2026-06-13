@@ -8,6 +8,10 @@ CREATE TABLE IF NOT EXISTS users (
   email VARCHAR(150) NOT NULL UNIQUE,
   password VARCHAR(255) NOT NULL,
   plan ENUM('free', 'basic', 'pro') DEFAULT 'free',
+  avatar VARCHAR(50) DEFAULT 'default',
+  default_major VARCHAR(100) DEFAULT NULL,
+  default_experience VARCHAR(20) DEFAULT NULL,
+  email_notifications BOOLEAN DEFAULT TRUE,
   created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 

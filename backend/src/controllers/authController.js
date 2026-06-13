@@ -93,5 +93,96 @@ const me = async (req, res, next) => {
     next(err);
   }
 };
+const updateProfile = async (req, res, next) => {
+  try {
+    const { name, email, avatar, default_major, default_experience, email_notifications } = req.body;
 
-module.exports = { register, login, me };
+    if (!name || !email) {
+      return res.status(400).json({ message: 'Name and email are required' });
+    }
+
+    // Check email not taken by another user
+    const [existing] = await db.query(
+      'SELECT id FROM users WHERE email = ? AND id != ?',
+      [email, req.user.id]
+    );
+
+    if (existing.length > 0) {
+      return res.status(409).json({ message: 'Email already in use' });
+    }
+
+    await db.query(
+      'UPDATE users SET name = ?, email = ?, avatar = ?, default_major = ?, default_experience = ?, email_notifications = ? WHERE id = ?',
+      [name, email, avatar || 'default', default_major || null, default_experience || null, email_notifications ?? true, req.user.id]
+    );
+
+    const [rows] = await db.query(
+      'SELECT id, name, email, plan, avatar, default_major, default_experience, email_notifications, created_at FROM users WHERE id = ?',
+      [req.user.id]
+    );
+
+    res.json({ message: 'Profile updated successfully', user: rows[0] });
+  } catch (err) {
+    next(err);
+  }
+};
+
+const changePassword = async (req, res, next) => {
+  try {
+    const { current_password, new_password } = req.body;
+
+    if (!current_password || !new_password) {
+      return res.status(400).json({ message: 'Both fields are required' });
+    }
+
+    if (new_password.length < 6) {
+      return res.status(400).json({ message: 'New password must be at least 6 characters' });
+    }
+
+    const [rows] = await db.query('SELECT * FROM users WHERE id = ?', [req.user.id]);
+    const user = rows[0];
+
+    const match = await bcrypt.compare(current_password, user.password);
+    if (!match) {
+      return res.status(401).json({ message: 'Current password is incorrect' });
+    }
+
+    if (current_password === new_password) {
+      return res.status(400).json({ message: 'New password must differ from current password' });
+    }
+
+    const hashed = await bcrypt.hash(new_password, 10);
+    await db.query('UPDATE users SET password = ? WHERE id = ?', [hashed, req.user.id]);
+
+    res.json({ message: 'Password changed successfully' });
+  } catch (err) {
+    next(err);
+  }
+};
+
+const deleteAccount = async (req, res, next) => {
+  try {
+    const { password } = req.body;
+
+    if (!password) {
+      return res.status(400).json({ message: 'Password is required to delete account' });
+    }
+
+    const [rows] = await db.query('SELECT * FROM users WHERE id = ?', [req.user.id]);
+    const user = rows[0];
+
+    const match = await bcrypt.compare(password, user.password);
+    if (!match) {
+      return res.status(401).json({ message: 'Incorrect password' });
+    }
+
+    await db.query('DELETE FROM users WHERE id = ?', [req.user.id]);
+
+    res.json({ message: 'Account deleted successfully' });
+  } catch (err) {
+    next(err);
+  }
+};
+
+
+module.exports = { register, login, me, updateProfile, changePassword, deleteAccount };
