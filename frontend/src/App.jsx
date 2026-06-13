@@ -7,6 +7,7 @@ import Dashboard from './pages/Dashboard';
 import Settings from './pages/Settings';
 import CvReview from './pages/CvReview';
 import Interview from './pages/Interview';
+import Quiz from './pages/Quiz';
 
 
 const ProtectedRoute = ({ children }) => {
@@ -45,6 +46,12 @@ function App() {
 <Route path="/interview" element={
   <ProtectedRoute>
     <Interview />
+  </ProtectedRoute>
+} />
+
+<Route path="/quiz" element={
+  <ProtectedRoute>
+    <Quiz />
   </ProtectedRoute>
 } />
     </Routes>
