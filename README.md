@@ -385,6 +385,14 @@ aceit/
 
 ---
 
+
+## Deployment
+
+- **Frontend (Live):** https://ace-it-eight.vercel.app
+- **Backend:** AWS EC2 (eu-north-1) — http://16.171.250.54:5000
+- **Database:** Aiven MySQL (eu-north-1)
+- **File Storage:** AWS S3 (eu-north-1)
+
 ## 👨‍💻 About
 
 I'm Abdallah Khatib, a Computer Science graduate from Lebanese International University 🇱🇧. AceIt is my third major full-stack project, following:
