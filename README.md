@@ -389,7 +389,8 @@ aceit/
 ## Deployment
 
 - **Frontend (Live):** https://ace-it-eight.vercel.app
-- **Backend:** AWS EC2 (eu-north-1) — http://16.171.250.54:5000
+- **Backend (Live):** https://aceit-api.mooo.com
+- **Server:** AWS EC2 (eu-north-1) running Node.js inside Docker + nginx + SSL
 - **Database:** Aiven MySQL (eu-north-1)
 - **File Storage:** AWS S3 (eu-north-1)
 
